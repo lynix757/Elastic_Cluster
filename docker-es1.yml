@@ -12,6 +12,8 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     networks:
       - es
     deploy:
@@ -23,7 +25,10 @@ configs:
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
  
-
+volumes:
+  esdata:
+    driver: local
+    
 networks:
   es:
     driver: overlay
