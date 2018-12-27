@@ -11,12 +11,7 @@ services:
       - source: elastic_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - bootstrap.memory_lock=true
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - es
     deploy:
