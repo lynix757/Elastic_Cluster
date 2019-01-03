@@ -2,14 +2,39 @@ version: '3.3'
 
 services:
 
-  elasticsearch:
+  elasticsearch_master:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     #restart: always
     ports:
       - "9200:9200"
       - "9300:9300"
     configs:
-      - source: elastic_config
+      - source: elastic_config1
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      #- bootstrap.memory_lock=true
+      #- "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    #ulimits:
+      #memlock:
+        #soft: -1
+        #hard: -1
+    volumes:
+      - esmaster:/usr/share/elasticsearch/data
+    networks:
+      - es
+    deploy:
+      mode: replicated
+      replicas: 3
+
+elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    #restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    configs:
+      - source: elastic_config2
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -60,8 +85,10 @@ services:
       
 configs:
 
-  elastic_config:
-    file: ./elasticsearch/config/elasticsearch.yml
+  elastic_config1:
+    file: ./elasticsearch/config_master/elasticsearch.yml
+  elastic_config2:
+    file: ./elasticsearch/config_data/elasticsearch.yml
   logstash_config:
     file: ./logstash/config/logstash.yml
   logstash_pipeline:
@@ -72,6 +99,8 @@ configs:
 volumes:
   esdata:
     driver: local
+  esmaster:
+    driver: local  
     
 networks:
   es:
