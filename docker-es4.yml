@@ -27,7 +27,7 @@ services:
       mode: replicated
       replicas: 3
 
-elasticsearch_data:
+  elasticsearch_data:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     #restart: always
     #ports:
