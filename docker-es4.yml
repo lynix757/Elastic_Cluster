@@ -9,7 +9,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     configs:
-      - source: elastic_config1
+      - source: elastic_config_master
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -34,7 +34,7 @@ elasticsearch:
       - "9200:9200"
       - "9300:9300"
     configs:
-      - source: elastic_config2
+      - source: elastic_config_data
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -85,16 +85,16 @@ elasticsearch:
       
 configs:
 
-  elastic_config1:
-    file: ./elasticsearch/config_master/elasticsearch.yml
-  elastic_config2:
-    file: ./elasticsearch/config_data/elasticsearch.yml
+  elastic_config_master:
+    file: ./elasticsearch/config4/elasticsearch.yml
+  elastic_config_data:
+    file: ./elasticsearch/config4/elasticsearch.yml
   logstash_config:
-    file: ./logstash/config/logstash.yml
+    file: ./logstash/config4/logstash.yml
   logstash_pipeline:
-    file: ./logstash/pipeline/logstash.conf
+    file: ./logstash/pipeline4/logstash.conf
   kibana_config:
-    file: ./kibana/config/kibana.yml
+    file: ./kibana/config4/kibana.yml
  
 volumes:
   esdata:
