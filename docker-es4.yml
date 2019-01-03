@@ -86,9 +86,9 @@ elasticsearch:
 configs:
 
   elastic_config_master:
-    file: ./elasticsearch/config4/elasticsearch.yml
+    file: ./elasticsearch/config4_master/elasticsearch.yml
   elastic_config_data:
-    file: ./elasticsearch/config4/elasticsearch.yml
+    file: ./elasticsearch/config4_data/elasticsearch.yml
   logstash_config:
     file: ./logstash/config4/logstash.yml
   logstash_pipeline:
