@@ -5,7 +5,7 @@
 cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
-node.name: ${HOSTNAME}_esdata
+node.name: esd_${HOSTNAME}
 
 node.master: false
 node.data: true
